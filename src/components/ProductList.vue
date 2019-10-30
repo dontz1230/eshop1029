@@ -1,5 +1,5 @@
 <template>
-    <div class="products">
+    <div class="products"> 
         <div class="products" id="products">
             <div class="container">
                 <h1 class="text-center p-5">Ourt Products List</h1>

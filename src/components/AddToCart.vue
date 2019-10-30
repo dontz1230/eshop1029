@@ -26,8 +26,7 @@ export default {
     },
     methods:{
         addToCart(){
-            console.log(this.item)
-            $('#cartWindow').modal('show')
+            alert('已加入購物車！')
             this.$store.commit('addToCart', this.item)
         }
     }

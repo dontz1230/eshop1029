@@ -8,6 +8,15 @@ export default new Vuex.Store({
   state: {
     cart: cart ? JSON.parse(cart) : []
   },
+  getters: {
+    totalPrice: state => {
+      let total = 0;
+      state.cart.filter((item) => {
+          total += (item.productPrice * item.productAmount);
+      });
+      return total;
+    }
+  },
   mutations: {
     addToCart(state, item){
       let bought = state.cart.find(product => 
@@ -16,6 +25,7 @@ export default new Vuex.Store({
 
       if(bought){
         bought.productAmount++
+        
       } else {
         state.cart.push(item);
       }

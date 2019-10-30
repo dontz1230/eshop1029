@@ -1,9 +1,8 @@
 <template>
-    <div>
+    <div> 
         <div class="cartModal" v-show="opencart" id="cartWindow">
-
-           <button class="cartClose">
-                        <span >&times;</span>
+           <button class="cartClose" @click="$emit('closeCart')">
+                        <span>&times;</span>
                 </button>
 
             <div class="cartContent">
@@ -26,8 +25,8 @@
                 </div>
 
                 <div class="cartFooter">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">繼續購物</button>
-                    <button @click="checkout(item)" type="button" class="btn btn-primary">完成訂單</button>
+                    <button type="button" @click="$emit('closeCart')">繼續購物</button>
+                    <button @click="checkout()" type="button" class="btn btn-primary">完成訂單</button>
                 </div>
             </div>
            
@@ -47,7 +46,7 @@ export default {
     },
      methods:{
         checkout(){
-            $('#cartWindow').modal('hide')
+            this.$emit('closeCart')
             this.$router.push('/checkout')
         },
         removeItem(item){
@@ -62,12 +61,13 @@ export default {
         top:50%;
         right:50%;
         transform:translate(50%,50%);
-        max-width: 600px;
+        width: 400px;
         background:white;
         padding:20px;
         position: absolute;
         z-index: 5;
         border-radius: 10px;
+        border: 1px solid #ff9a9e;
         box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
 
         >.cartClose {
@@ -97,11 +97,8 @@ export default {
             }
         }
 
-        >.cartContent {
+        > .cartContent {
             position: relative;
-            padding:0;
-            
-            
 
             > .cartHeader {
                 position: relative;
@@ -111,7 +108,8 @@ export default {
             }
 
             > .cartBody {
-
+                padding: 10px;
+                margin: 10px auto;
             }
 
             > .cartFooter {

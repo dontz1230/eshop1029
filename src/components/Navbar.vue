@@ -1,6 +1,6 @@
 <template>
   <div>
-
+ 
     <nav class="navbar">
   
       <span class="navbar-toggle" id="js-navbar-toggle" @click="toggleMenu">
@@ -18,11 +18,8 @@
         </li>
         <li>
           <!-- <login></login> -->
-          <a class="cartbtn nav-link">登入會員</a>
-          <cartpop :opencart="opencart"></cartpop>
-        </li>
-        <li>
-         <a @click="showCart" class="cartbtn nav-link" data-target="#cartWindow" >CART</a>
+          <a class="cartbtn nav-link" @click="showCart">購物車</a>
+          <cartpop :opencart="opencart" @closeCart="closeCart"></cartpop>
         </li>
         
       </ul>
@@ -73,11 +70,14 @@ export default {
   },
   methods:{
     showCart(){
-      $('#cartWindow').modal('show')
+      this.opencart = true
     },
     toggleMenu(){
       let mainNav = document.getElementById('js-menu');
       mainNav.classList.toggle('active');
+    },
+    closeCart(){
+      this.opencart = false
     }
   }
 }
