@@ -17,39 +17,16 @@
           <router-link to="/about" class="nav-link" href="#">關於</router-link>
         </li>
         <li>
-          <!-- <login></login> -->
           <a class="cartbtn nav-link" @click="showCart">購物車</a>
           <cartpop :opencart="opencart" @closeCart="closeCart"></cartpop>
         </li>
+        <li>
+          <a class="cartbtn nav-link" @click="openLogin = true">登入/註冊</a>
+          <login :openLogin="openLogin" @closeLogin="closeLogin"></login>
+        </li>
         
       </ul>
-</nav>
-
-
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">田園美食屋</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <router-link to="/home" class="nav-link" href="#">首頁</router-link >
-            </li>
-            <li class="nav-item">
-              <router-link to="/about" class="nav-link" href="#">關於</router-link>
-            </li>
-            
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            
-            <a class="btn btn-outline-success my-2 my-sm-0" data-target="#login">Login</a>
-            <a @click="showCart" class="btn btn-outline-info my-2 my-sm-0" data-target="#cartWindow">CART</a>
-            <login></login>
-          </form>
-        </div>
-    </nav> -->
+    </nav>
   </div>
 </template>
 
@@ -65,12 +42,16 @@ export default {
   },
   data(){
     return {
-      opencart: true
+      opencart: true,
+      openLogin: false
     }
   },
   methods:{
     showCart(){
       this.opencart = true
+    },
+    openLogin(){
+      this.openLogin = true
     },
     toggleMenu(){
       let mainNav = document.getElementById('js-menu');
@@ -78,6 +59,9 @@ export default {
     },
     closeCart(){
       this.opencart = false
+    },
+    closeLogin(){
+      this.openLogin = false
     }
   }
 }

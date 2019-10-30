@@ -1,4 +1,4 @@
-<template>
+<template> 
     <div> 
         <div class="cartModal" v-show="opencart" id="cartWindow">
            <button class="cartClose" @click="$emit('closeCart')">
@@ -7,26 +7,28 @@
 
             <div class="cartContent">
 
-                
-
                 <div class="cartHeader">
-                    <h5 class="cartTitle">小小的購物車</h5> 
+                    <h4 class="cartTitle">小小的購物車</h4> 
                 </div>
 
                 <div class="cartBody">
                     <ul>
                         <li v-for="item in this.$store.state.cart">
-                        <img :src="item.productImage" width="80px" alt="">
-                        {{ item.productName }}
-                        <span @click="removeItem" class="float-right">X</span>
-                        {{ item.productAmount }}個
+                            <img :src="item.productImage" width="50px" alt="">
+                            <span>{{ item.productName }} x {{ item.productAmount }}個</span>
+                            <span>{{ item.productPrice }}元</span>
+                            
+                            <span @click="removeItem" class="removeBtn">
+                                <i class="fa fa-close"></i>
+                            </span>
                         </li>
+                        <span>總共 {{ this.$store.getters['totalPrice']}} 元</span>
                     </ul>
                 </div>
 
                 <div class="cartFooter">
-                    <button type="button" @click="$emit('closeCart')">繼續購物</button>
-                    <button @click="checkout()" type="button" class="btn btn-primary">完成訂單</button>
+                    <button type="button" @click="$emit('closeCart')" class="shoppingBtn">繼續購物</button>
+                    <button @click="checkout()" type="button" class="checkoutBtn">完成訂單</button>
                 </div>
             </div>
            
@@ -54,9 +56,12 @@ export default {
         }
     }
 }
+
 </script>
 
 <style lang="scss">
+@import '../assets/style.scss';
+
     .cartModal {
         top:50%;
         right:50%;
@@ -67,8 +72,8 @@ export default {
         position: absolute;
         z-index: 5;
         border-radius: 10px;
-        border: 1px solid #ff9a9e;
-        box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+        border: $Border;
+        box-shadow: $DeepShadow;
 
         >.cartClose {
             border-radius: 50%;
@@ -78,9 +83,10 @@ export default {
             top: -10px;
             right: -10px;
             background:white;
-            color: rgb(255, 128, 128);
-            border: 1px solid rgb(255, 128, 128);
+            color: $Color;
+            border: $Border;
             overflow: hidden;
+
             > span {
                 height: 15px;
                 font-size: 30px;
@@ -92,7 +98,7 @@ export default {
             }
 
             &:hover{
-                background:rgb(255, 128, 128);
+                background:$Color;
                 color: white;
             }
         }
@@ -101,19 +107,74 @@ export default {
             position: relative;
 
             > .cartHeader {
+                color: $Color;
                 position: relative;
                 height:2rem;
-                border-bottom: 1px solid black;
+                margin:1rem;
+                
                 
             }
 
             > .cartBody {
                 padding: 10px;
                 margin: 10px auto;
+                color: $TextColor;
+                > ul {
+                    display: grid;
+                    grid-gap: 10px;
+
+                    > li {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 10px 0;
+                        border-bottom: $Border;
+
+                        > .removeBtn {
+                            color: red;
+                        }
+
+                        > img {
+                            border-radius: 100px;
+                        }
+                    }
+                }
             }
 
             > .cartFooter {
+                display: flex;
+                justify-content: flex-end;
 
+                >.shoppingBtn {
+                    text-align: center;
+                    border: $Border2;
+                    background: none;
+                    padding:5px 10px;
+                    color: $Color2;
+                    border-radius: $BorderRadius;
+                    transition: all .3s;
+                    &:hover {
+                        background: $Color2;
+                        padding:5px 10px;
+                        color: white;
+                    }
+                }
+
+                > .checkoutBtn {
+                    margin-left: 15px;
+                    text-align: center;
+                    border:$Border;
+                    background: none;
+                    padding:5px 10px;
+                    color: $Color;
+                    border-radius: $BorderRadius;
+                    transition: all .3s;
+                    &:hover {
+                        background: $Color;
+                        padding:5px 10px;
+                        color: white;
+                    }
+                }
             }
         }
        

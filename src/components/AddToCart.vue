@@ -1,4 +1,4 @@
-<template>
+<template> 
     <div class="add-to-cart">
         <button class="btn btn-primary" @click="addToCart">Add to Card</button>
     </div>
@@ -26,7 +26,7 @@ export default {
     },
     methods:{
         addToCart(){
-            alert('已加入購物車！')
+            alert(JSON.stringify(this.item))
             this.$store.commit('addToCart', this.item)
         }
     }
